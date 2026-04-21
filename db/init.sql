@@ -136,6 +136,7 @@ CREATE TABLE `operation_log` (
   `status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态：0-失败,1-成功',
   `error_msg` TEXT COMMENT '错误信息',
   `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_user_id` (`user_id`),
   KEY `idx_create_time` (`create_time`)
