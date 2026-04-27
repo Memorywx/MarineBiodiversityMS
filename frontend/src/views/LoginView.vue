@@ -40,7 +40,7 @@ const handleLogin = async () => {
   <div class="login-container">
     <el-card class="login-card" shadow="always">
       <h2 class="title">海洋生物多样性信息管理系统</h2>
-      <el-form ref="formRef" :model="form" :rules="rules" label-position="top">
+      <el-form ref="formRef" :model="form" :rules="rules" label-position="top" @submit.prevent>
         <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username" placeholder="请输入用户名" prefix-icon="User" />
         </el-form-item>

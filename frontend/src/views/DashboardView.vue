@@ -62,7 +62,7 @@ const renderSpeciesMap = (data) => {
   }).addTo(map)
   data.forEach(p => {
     if (p.lat != null && p.lng != null) {
-      L.marker([p.lat, p.lng]).addTo(map)
+      L.circleMarker([p.lat, p.lng], { radius: 8, color: '#409EFF', fillColor: '#409EFF', fillOpacity: 0.8 }).addTo(map)
         .bindPopup(`<b>${p.chineseName}</b><br/>${p.scientificName}`)
     }
   })
@@ -77,7 +77,7 @@ const renderObservationMap = (data) => {
   }).addTo(map)
   data.forEach(p => {
     if (p.lat != null && p.lng != null) {
-      L.marker([p.lat, p.lng]).addTo(map)
+      L.circleMarker([p.lat, p.lng], { radius: 8, color: '#67C23A', fillColor: '#67C23A', fillOpacity: 0.8 }).addTo(map)
         .bindPopup(`<b>${p.locationName || '观测点'}</b><br/>时间：${p.observationTime}<br/>生态系统：${p.ecosystemName || '-'}<br/>物种数：${p.speciesCount || 0}`)
     }
   })

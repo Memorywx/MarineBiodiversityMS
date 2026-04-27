@@ -44,13 +44,9 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/index.html", "/assets/**", "/favicon.svg", "/icons.svg").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/species/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/ecosystems/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/observations/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/dashboard/**").authenticated()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/**").permitAll()
                 )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
