@@ -2,6 +2,7 @@
 import { ref, onMounted, reactive, computed } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getUserList, createUser, updateUser, deleteUser, approveUser, updateUserRoleStatus } from '../api/user.js'
+import { exportCSV } from '../utils/export.js'
 
 const tableData = ref([])
 const loading = ref(false)
@@ -118,6 +119,15 @@ onMounted(loadData)
     <el-card>
       <div style="margin-bottom: 16px">
         <el-button type="primary" @click="handleAdd">新增用户</el-button>
+        <el-button @click="exportCSV('用户列表.csv', [
+          { label: 'ID', prop: 'id' },
+          { label: '用户名', prop: 'username' },
+          { label: '真实姓名', prop: 'realName' },
+          { label: '邮箱', prop: 'email' },
+          { label: '角色', prop: 'role' },
+          { label: '状态', prop: 'status' },
+          { label: '创建时间', prop: 'createTime' }
+        ], tableData.map(r => ({ ...r, role: roleMap[r.role], status: statusMap[r.status] })))">导出CSV</el-button>
       </div>
       <el-table :data="tableData" v-loading="loading" border>
         <el-table-column prop="id" label="ID" width="60" />

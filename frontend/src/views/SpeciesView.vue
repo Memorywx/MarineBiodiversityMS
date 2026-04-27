@@ -2,6 +2,7 @@
 import { ref, onMounted, reactive } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getSpeciesList, createSpecies, updateSpecies, deleteSpecies } from '../api/species.js'
+import { exportCSV } from '../utils/export.js'
 
 const tableData = ref([])
 const loading = ref(false)
@@ -132,6 +133,16 @@ onMounted(loadData)
     <el-card>
       <div style="margin-bottom: 16px">
         <el-button type="primary" @click="handleAdd">新增物种</el-button>
+        <el-button @click="exportCSV('物种信息.csv', [
+          { label: 'ID', prop: 'id' },
+          { label: '中文名', prop: 'chineseName' },
+          { label: '学名', prop: 'scientificName' },
+          { label: '门', prop: 'phylum' },
+          { label: '纲', prop: 'className' },
+          { label: '保护等级', prop: 'protectionLevel' },
+          { label: 'IUCN', prop: 'iucnStatus' },
+          { label: '创建时间', prop: 'createTime' }
+        ], tableData)">导出CSV</el-button>
       </div>
       <el-table :data="tableData" v-loading="loading" border>
         <el-table-column prop="id" label="ID" width="60" />
@@ -141,8 +152,9 @@ onMounted(loadData)
         <el-table-column prop="className" label="纲" width="100" />
         <el-table-column prop="protectionLevel" label="保护等级" width="100" />
         <el-table-column prop="iucnStatus" label="IUCN" width="80" />
-        <el-table-column label="操作" width="150" fixed="right">
+        <el-table-column label="操作" width="200" fixed="right">
           <template #default="{ row }">
+            <el-button type="primary" size="small" @click="$router.push('/species/' + row.id)">详情</el-button>
             <el-button type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
             <el-button type="danger" size="small" @click="handleDelete(row)">删除</el-button>
           </template>

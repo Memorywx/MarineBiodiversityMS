@@ -2,6 +2,7 @@
 import { ref, onMounted, reactive } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getEcosystemList, createEcosystem, updateEcosystem, deleteEcosystem } from '../api/ecosystem.js'
+import { exportCSV } from '../utils/export.js'
 
 const tableData = ref([])
 const loading = ref(false)
@@ -94,6 +95,14 @@ onMounted(loadData)
     <el-card>
       <div style="margin-bottom: 16px">
         <el-button type="primary" @click="handleAdd">新增生态系统</el-button>
+        <el-button @click="exportCSV('生态系统.csv', [
+          { label: 'ID', prop: 'id' },
+          { label: '名称', prop: 'name' },
+          { label: '类型', prop: 'type' },
+          { label: '描述', prop: 'description' },
+          { label: '地理范围', prop: 'geoRange' },
+          { label: '环境特征', prop: 'environmentFeatures' }
+        ], tableData)">导出CSV</el-button>
       </div>
       <el-table :data="tableData" v-loading="loading" border>
         <el-table-column prop="id" label="ID" width="60" />

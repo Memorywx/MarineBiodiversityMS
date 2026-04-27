@@ -29,6 +29,7 @@ const menuItems = [
   { index: '/ecosystem', icon: 'MapLocation', title: '生态系统' },
   { index: '/observation', icon: 'View', title: '观测记录' },
   { index: '/user', icon: 'UserFilled', title: '用户管理', adminOnly: true },
+  { index: '/operation-logs', icon: 'List', title: '操作日志', adminOnly: true },
 ]
 </script>
 

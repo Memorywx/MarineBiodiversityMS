@@ -55,7 +55,8 @@ const handleLogin = async () => {
       </el-form>
       <div class="hint">
         默认账号：admin / 123456（管理员）<br>
-        researcher / 123456（科研人员）
+        researcher / 123456（科研人员）<br>
+        没有账号？<el-link type="primary" @click="router.push('/register')">立即注册</el-link>
       </div>
     </el-card>
   </div>
