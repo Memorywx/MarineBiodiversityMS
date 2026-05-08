@@ -9,6 +9,7 @@ import org.gdou.marine.biodiversity.mapper.EcosystemMapper;
 import org.gdou.marine.biodiversity.mapper.ObservationMapper;
 import org.gdou.marine.biodiversity.mapper.ObservationSpeciesMapper;
 import org.gdou.marine.biodiversity.mapper.SpeciesMapper;
+import org.gdou.marine.biodiversity.mapper.UserMapper;
 import org.gdou.marine.biodiversity.service.DashboardService;
 import org.gdou.marine.biodiversity.vo.DashboardStatsVO;
 import org.gdou.marine.biodiversity.vo.MapPointVO;
@@ -28,15 +29,18 @@ public class DashboardServiceImpl implements DashboardService {
     private final ObservationMapper observationMapper;
     private final EcosystemMapper ecosystemMapper;
     private final ObservationSpeciesMapper observationSpeciesMapper;
+    private final UserMapper userMapper;
 
     public DashboardServiceImpl(SpeciesMapper speciesMapper,
                                  ObservationMapper observationMapper,
                                  EcosystemMapper ecosystemMapper,
-                                 ObservationSpeciesMapper observationSpeciesMapper) {
+                                 ObservationSpeciesMapper observationSpeciesMapper,
+                                 UserMapper userMapper) {
         this.speciesMapper = speciesMapper;
         this.observationMapper = observationMapper;
         this.ecosystemMapper = ecosystemMapper;
         this.observationSpeciesMapper = observationSpeciesMapper;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -45,6 +49,7 @@ public class DashboardServiceImpl implements DashboardService {
         vo.setTotalSpecies(speciesMapper.selectCount(null));
         vo.setTotalObservations(observationMapper.selectCount(null));
         vo.setTotalEcosystems(ecosystemMapper.selectCount(null));
+        vo.setTotalUsers(userMapper.selectCount(null));
 
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime firstDayOfMonth = now.withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0);

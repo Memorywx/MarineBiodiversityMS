@@ -155,7 +155,7 @@ onMounted(() => {
           <div style="display: flex; align-items: center; gap: 12px">
             <el-icon size="40" color="#F56C6C"><UserFilled /></el-icon>
             <div>
-              <div style="font-size: 24px; font-weight: bold">{{ stats.userCount || 0 }}</div>
+              <div style="font-size: 24px; font-weight: bold">{{ stats.totalUsers || 0 }}</div>
               <div style="color: #909399; font-size: 14px">用户总数</div>
             </div>
           </div>
